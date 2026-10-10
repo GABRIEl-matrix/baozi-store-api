@@ -27,4 +27,19 @@ public class PedidoController {
         if (!repository.existsById(id)) return ResponseEntity.notFound().build();
         repository.deleteById(id); return ResponseEntity.noContent().build();
     }
+    
+    @PutMapping("/{id}")
+    public ResponseEntity<Pedido> atualizar(
+            @PathVariable Long id,
+            @Valid @RequestBody Pedido dados) {
+        return repository.findById(id).map(pedido -> {
+            pedido.setClienteId(dados.getClienteId());
+            pedido.setProdutoId(dados.getProdutoId());
+            pedido.setQuantidade(dados.getQuantidade());
+
+            Pedido atualizado = repository.save(pedido);
+            return ResponseEntity.ok(atualizado);
+        }).orElse(ResponseEntity.notFound().build());
+    }
+
 }

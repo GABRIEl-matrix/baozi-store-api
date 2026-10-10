@@ -27,4 +27,20 @@ public class ProdutoController {
         if (!repository.existsById(id)) return ResponseEntity.notFound().build();
         repository.deleteById(id); return ResponseEntity.noContent().build();
     }
+    
+    @PutMapping("/{id}")
+    public ResponseEntity<Produto> atualizar(
+            @PathVariable Long id,
+            @Valid @RequestBody Produto dados) {
+
+        return repository.findById(id).map(produto -> {
+            produto.setNome(dados.getNome());
+            produto.setPreco(dados.getPreco());
+            produto.setEstoque(dados.getEstoque());
+
+            Produto atualizado = repository.save(produto);
+            return ResponseEntity.ok(atualizado);
+        }).orElse(ResponseEntity.notFound().build());
+    }
+
 }

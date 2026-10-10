@@ -23,8 +23,28 @@ public class ClienteController {
     @GetMapping("/{id}") public ResponseEntity<Cliente> buscar(@PathVariable Long id) {
         return repository.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
-    @DeleteMapping("/{id}") public ResponseEntity<Void> excluir(@PathVariable Long id) {
-        if (!repository.existsById(id)) return ResponseEntity.notFound().build();
-        repository.deleteById(id); return ResponseEntity.noContent().build();
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
+        if (!repository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        repository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Cliente> atualizar(
+            @PathVariable Long id,
+            @Valid @RequestBody Cliente dados) {
+
+        return repository.findById(id).map(cliente -> {
+            cliente.setNome(dados.getNome());
+            cliente.setClienteDesde(dados.getClienteDesde());
+
+            Cliente atualizado = repository.save(cliente);
+            return ResponseEntity.ok(atualizado);
+        }).orElse(ResponseEntity.notFound().build());
     }
 }
+
