@@ -12,19 +12,23 @@ Projeto acadêmico de Desenvolvimento Web Back-End. Implementado com Java 17, Sp
 3. A API ficará disponível em `http://localhost:8080`.
 
 ## Endpoints
+
 | Método | Caminho | Ação |
 |---|---|---|
 | POST | `/api/clientes` | Criar cliente |
 | GET | `/api/clientes` | Listar clientes |
 | GET | `/api/clientes/{id}` | Consultar cliente |
+| PUT | `/api/clientes/{id}` | Atualizar cliente |
 | DELETE | `/api/clientes/{id}` | Excluir cliente |
 | POST | `/api/produtos` | Criar produto |
 | GET | `/api/produtos` | Listar produtos |
 | GET | `/api/produtos/{id}` | Consultar produto |
+| PUT | `/api/produtos/{id}` | Atualizar produto |
 | DELETE | `/api/produtos/{id}` | Excluir produto |
 | POST | `/api/pedidos` | Criar pedido |
 | GET | `/api/pedidos` | Listar pedidos |
 | GET | `/api/pedidos/{id}` | Consultar pedido |
+| PUT | `/api/pedidos/{id}` | Atualizar pedido |
 | DELETE | `/api/pedidos/{id}` | Excluir pedido |
 
 ## Exemplos de JSON para Postman
